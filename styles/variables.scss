@@ -1,0 +1,32 @@
+:root {
+  --surface: #0e1116;
+  --surface-2: #171c25;
+  --surface-3: #222a38;
+
+  --accent: #ffc92b;
+  --on-accent: #0e1116;
+
+  --text: #e8ebf1;
+  --text-muted: #9aa3b2;
+
+  --success: #2ecc71;
+  --danger: #ff4d6a;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --radius: 10px;
+  --radius-sm: 6px;
+
+  --gap-xs: 4px;
+  --gap-sm: 8px;
+  --gap-md: 12px;
+  --gap-lg: 16px;
+
+  --app-max-width: 1200px;
+  --betslip-width: 360px;
+  --row-event-height: 56px;
+  --row-league-height: 38px;
+  --odd-cell-w: 52px;
+  --group-gap: 6px;
+
+  --transition: 150ms ease;
+}
