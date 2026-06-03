@@ -1,3 +1,5 @@
+@use '../../../../styles/responsive' as *;
+
 .market-header {
   width: 100%;
   background: var(--surface-2);
@@ -61,7 +63,7 @@
 
     .market-header-select {
       position: relative;
-      display: block;
+      display: none;
       width: 100%;
 
       select {
@@ -99,7 +101,18 @@
     }
   }
 
-  &.market-header-mobile .market-header-inner {
-    padding: var(--gap-sm);
+  @include respond(small-tablet) {
+    .market-header-inner {
+      padding: var(--gap-sm);
+
+      .market-header-spacer,
+      .market-header-cols {
+        display: none;
+      }
+
+      .market-header-select {
+        display: block;
+      }
+    }
   }
 }
