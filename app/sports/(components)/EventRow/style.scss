@@ -71,13 +71,6 @@
       align-items: center;
       gap: var(--gap-md);
       flex: 0 0 auto;
-
-      .event-row-group {
-        display: grid;
-        grid-template-columns: repeat(var(--cols), var(--odd-cell-w));
-        gap: var(--group-gap);
-        width: calc(var(--cols) * var(--odd-cell-w) + (var(--cols) - 1) * var(--group-gap));
-      }
     }
   }
 
@@ -91,4 +84,11 @@
       }
     }
   }
+}
+
+:where(.event-row .event-row-inner .event-row-markets) .event-row-group {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--odd-cell-w));
+  gap: var(--group-gap);
+  width: calc(var(--cols) * var(--odd-cell-w) + (var(--cols) - 1) * var(--group-gap));
 }
