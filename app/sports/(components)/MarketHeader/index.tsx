@@ -18,7 +18,11 @@ function MarketHeaderBase({ className }: MarketHeaderProps) {
     <div className={`market-header${className ? ` ${className}` : ''}`} role="row">
       <div className="market-header-inner">
         <label className="market-header-select">
-          <select aria-label="Market seçimi" value={mobileMarketId} onChange={(e) => handleMobileChange(e.target.value)}>
+          <select
+            aria-label="Market seçimi"
+            value={mobileMarketId}
+            onChange={(e) => handleMobileChange(e.target.value)}
+          >
             {MARKETS.map((m) => (
               <option key={m.id} value={m.id}>
                 {m.name}

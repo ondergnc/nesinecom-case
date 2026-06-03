@@ -4,8 +4,36 @@
   flex: 1 1 auto;
   overflow: hidden;
 
+  .skeleton-league {
+    box-sizing: border-box;
+    padding-top: var(--gap-sm);
+
+    .skeleton-league-inner {
+      max-width: var(--app-max-width);
+      height: 38px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      padding: 0 var(--gap-md);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-bottom: none;
+      border-radius: var(--radius) var(--radius) 0 0;
+
+      .skeleton-bar-league {
+        width: 140px;
+        height: 10px;
+      }
+    }
+  }
+
   .skeleton-row {
     height: var(--row-event-height);
+
+    &.skeleton-row-last .skeleton-inner {
+      border-bottom: 1px solid var(--border);
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
 
     .skeleton-inner {
       max-width: var(--app-max-width);
@@ -15,6 +43,9 @@
       align-items: center;
       gap: var(--gap-md);
       padding: 0 var(--gap-md);
+      background: var(--surface-2);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
 
       .skeleton-info {
         display: flex;
@@ -23,28 +54,11 @@
         flex: 1 1 auto;
         min-width: 0;
 
-        .skeleton-line {
-          height: 10px;
-          border-radius: 4px;
-          background: var(--surface-3);
-          position: relative;
-          overflow: hidden;
-
-          &::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            transform: translateX(-100%);
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-            animation: skeleton-shimmer 1.2s infinite;
-          }
-        }
-
-        .skeleton-line-sm {
+        .skeleton-bar-sm {
           width: 40%;
         }
 
-        .skeleton-line-lg {
+        .skeleton-bar-lg {
           width: 75%;
         }
       }
@@ -72,6 +86,23 @@
           }
         }
       }
+    }
+  }
+
+  .skeleton-bar {
+    height: 10px;
+    border-radius: 4px;
+    background: var(--surface-3);
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      transform: translateX(-100%);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+      animation: skeleton-shimmer 1.2s infinite;
     }
   }
 

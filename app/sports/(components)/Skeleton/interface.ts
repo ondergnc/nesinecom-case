@@ -1,3 +1,4 @@
 export interface EventsSkeletonProps {
-  rows?: number;
+  groups?: number;
+  rowsPerGroup?: number;
 }
