@@ -42,7 +42,17 @@ Uygulama `http://localhost:3000` adresinde açılır ve kök yol otomatik olarak
 | `yarn start` | Üretim sunucusu |
 | `yarn lint` | ESLint |
 | `yarn format` | Prettier ile biçimlendirme |
+| `yarn test` | Testleri çalıştırır (Vitest) |
+| `yarn test:watch` | Testleri izleme modunda çalıştırır |
 | `yarn analyze` | Bundle analizi |
+
+## Testler
+
+Vitest + React Testing Library ile yazılmıştır. Kapsam: `lib/format` (para/oran biçimlendirme), `features/betslip` (reducer + selector'lar) ve `CouponCard` (bileşen render + etkileşim).
+
+```bash
+yarn test
+```
 
 ## Sayfalar
 
