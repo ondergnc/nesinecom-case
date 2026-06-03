@@ -1,0 +1,122 @@
+.betslip-footer {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  padding: var(--gap-md);
+  background: var(--surface-3);
+  border-top: 1px solid var(--border);
+
+  .betslip-footer-row {
+    .betslip-footer-stake {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--gap-md);
+
+      .betslip-footer-stake-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .betslip-footer-stake-field {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 8px 10px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+
+        &:focus-within {
+          border-color: var(--accent);
+        }
+
+        input {
+          width: 90px;
+          border: none;
+          background: transparent;
+          color: var(--text);
+          font-family: var(--font-body);
+          font-size: 15px;
+          font-weight: 700;
+          text-align: right;
+          font-variant-numeric: tabular-nums;
+          outline: none;
+          appearance: textfield;
+          -moz-appearance: textfield;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            appearance: none;
+            margin: 0;
+          }
+        }
+
+        .betslip-footer-stake-unit {
+          color: var(--text-muted);
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  .betslip-footer-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .betslip-footer-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-muted);
+
+      strong {
+        color: var(--text);
+        font-variant-numeric: tabular-nums;
+      }
+
+      &.betslip-footer-line-accent strong {
+        color: var(--accent);
+        font-size: 15px;
+      }
+    }
+  }
+
+  .betslip-footer-submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-sm);
+    height: 46px;
+    padding: 0 var(--gap-md);
+    border: none;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--on-accent);
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:disabled {
+      background: var(--surface);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+
+    @media (hover: hover) {
+      &:not(:disabled):hover {
+        filter: brightness(1.05);
+      }
+    }
+
+    .betslip-footer-submit-amount {
+      font-variant-numeric: tabular-nums;
+    }
+  }
+}

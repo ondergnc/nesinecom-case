@@ -1,0 +1,35 @@
+@use '../../../../styles/responsive' as *;
+
+$market-ids: '1', '2', '5';
+
+.events-list {
+  height: 100%;
+  width: 100%;
+
+  .events-list-list {
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    scrollbar-color: var(--surface-3) transparent;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--surface-3);
+      border-radius: 4px;
+    }
+  }
+
+  @include respond(small-tablet) {
+    .event-row-group {
+      display: none;
+    }
+
+    @each $id in $market-ids {
+      &[data-mobile-market='#{$id}'] .event-row-group[data-market='#{$id}'] {
+        display: grid;
+      }
+    }
+  }
+}

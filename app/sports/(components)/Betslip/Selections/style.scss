@@ -1,0 +1,11 @@
+.selections {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--gap-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-3) transparent;
+}

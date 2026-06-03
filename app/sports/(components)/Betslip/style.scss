@@ -1,0 +1,107 @@
+@use '../../../../styles/responsive' as *;
+
+.betslip {
+  position: fixed;
+  z-index: 20;
+  font-family: var(--font-body);
+
+  &.betslip-collapsed {
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+  }
+
+  &.betslip-expanded {
+    right: 16px;
+    bottom: 16px;
+    width: var(--betslip-width);
+    max-height: min(72vh, 620px);
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+
+    .betslip-header {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+      flex: 0 0 auto;
+      padding: var(--gap-sm) var(--gap-md);
+      background: var(--surface-3);
+      border-bottom: 1px solid var(--border);
+
+      .betslip-collapse {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border: none;
+        border-radius: var(--radius-sm);
+        background: transparent;
+        color: var(--text-muted);
+        font-size: 14px;
+        cursor: pointer;
+
+        @media (hover: hover) {
+          &:hover {
+            background: var(--surface-2);
+            color: var(--text);
+          }
+        }
+      }
+
+      .betslip-title {
+        font-family: var(--font-heading);
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      .betslip-count {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 6px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: var(--on-accent);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .betslip-clear {
+        margin-left: auto;
+        border: none;
+        background: transparent;
+        color: var(--danger);
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+    }
+  }
+
+  @include respond(small-tablet) {
+    &.betslip-collapsed {
+      right: 0;
+      left: 0;
+      bottom: 0;
+      width: auto;
+    }
+
+    &.betslip-expanded {
+      right: 0;
+      left: 0;
+      bottom: 0;
+      width: auto;
+      max-height: 82dvh;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+  }
+}

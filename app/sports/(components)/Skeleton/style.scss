@@ -1,0 +1,89 @@
+@use '../../../../styles/responsive' as *;
+
+.skeleton {
+  flex: 1 1 auto;
+  overflow: hidden;
+
+  .skeleton-row {
+    height: var(--row-event-height);
+
+    .skeleton-inner {
+      max-width: var(--app-max-width);
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+      padding: 0 var(--gap-md);
+
+      .skeleton-info {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        flex: 1 1 auto;
+        min-width: 0;
+
+        .skeleton-line {
+          height: 10px;
+          border-radius: 4px;
+          background: var(--surface-3);
+          position: relative;
+          overflow: hidden;
+
+          &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            transform: translateX(-100%);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+            animation: skeleton-shimmer 1.2s infinite;
+          }
+        }
+
+        .skeleton-line-sm {
+          width: 40%;
+        }
+
+        .skeleton-line-lg {
+          width: 75%;
+        }
+      }
+
+      .skeleton-odds {
+        display: flex;
+        gap: var(--group-gap);
+        flex: 0 0 auto;
+
+        .skeleton-cell {
+          width: var(--odd-cell-w);
+          height: 44px;
+          border-radius: var(--radius-sm);
+          background: var(--surface-3);
+          position: relative;
+          overflow: hidden;
+
+          &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            transform: translateX(-100%);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+            animation: skeleton-shimmer 1.2s infinite;
+          }
+        }
+      }
+    }
+  }
+
+  @include respond(small-tablet) {
+    .skeleton-odds .skeleton-cell:nth-child(n + 2) {
+      display: none;
+    }
+  }
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

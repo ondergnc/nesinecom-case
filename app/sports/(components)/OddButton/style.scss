@@ -1,0 +1,83 @@
+@use '../../../../styles/responsive' as *;
+
+.odd-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 100%;
+  height: 44px;
+  padding: 4px 2px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-3);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease,
+    border-color 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  .odd-button-label {
+    display: none;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .odd-button-odd {
+    font-size: 14px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &.odd-button-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+
+    .odd-button-label {
+      color: var(--on-accent);
+      opacity: 0.7;
+    }
+  }
+
+  &.odd-button-locked {
+    cursor: not-allowed;
+    background: var(--surface-2);
+    color: var(--text-muted);
+
+    .odd-button-odd {
+      font-size: 11px;
+      opacity: 0.6;
+    }
+  }
+
+  @media (hover: hover) {
+    &:not(.odd-button-active):not(.odd-button-locked):hover {
+      background: var(--surface-3);
+      border-color: var(--accent);
+    }
+  }
+
+  @include respond(small-tablet) {
+    .odd-button-label {
+      display: block;
+    }
+
+    .odd-button-odd {
+      font-size: 13px;
+    }
+  }
+}

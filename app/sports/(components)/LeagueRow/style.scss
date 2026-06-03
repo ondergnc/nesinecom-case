@@ -1,0 +1,29 @@
+.league-row {
+  box-sizing: border-box;
+  padding-top: var(--gap-sm);
+  font-family: var(--font-heading);
+
+  .league-row-inner {
+    max-width: var(--app-max-width);
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--gap-md);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: var(--radius) var(--radius) 0 0;
+
+    .league-row-name {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-transform: uppercase;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
