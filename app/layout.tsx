@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Oswald, Roboto } from 'next/font/google';
+import Providers from '@/components/Providers';
 import './globals.scss';
 
 const oswald = Oswald({
@@ -27,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className={`${oswald.variable} ${roboto.variable}`}>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

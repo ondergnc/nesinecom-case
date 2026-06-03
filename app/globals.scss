@@ -1,3 +1,11 @@
+@use '../styles/variables';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;
@@ -7,7 +15,12 @@ body {
 }
 
 body {
-  font-family: var(--font-body), sans-serif;
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+  overscroll-behavior: none;
 }
 
 h1,
@@ -16,5 +29,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-heading), sans-serif;
+  font-family: var(--font-heading), system-ui, sans-serif;
+}
+
+button {
+  font-family: inherit;
 }
