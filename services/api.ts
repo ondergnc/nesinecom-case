@@ -15,7 +15,8 @@ export interface RequestOptions {
 const hasCacheApi = () => typeof caches !== 'undefined';
 
 function buildUrl(path: string, query?: Query): string {
-  const url = new URL(path.startsWith('http') ? path : `${BASE_URL}${path}`);
+  const base = path.startsWith('http') ? undefined : typeof window !== 'undefined' ? window.location.origin : BASE_URL;
+  const url = new URL(path, base);
   if (query) {
     for (const [key, value] of Object.entries(query)) {
       if (value !== undefined) url.searchParams.set(key, String(value));
@@ -33,17 +34,22 @@ async function writeCache(url: string, body: string): Promise<void> {
 }
 
 export async function readCache<T>(path: string, query?: Query): Promise<T | null> {
+  const text = await readCacheText(path, query);
+  return text ? (JSON.parse(text) as T) : null;
+}
+
+export async function readCacheText(path: string, query?: Query): Promise<string | null> {
   if (!hasCacheApi()) return null;
   try {
     const cache = await caches.open(CACHE_NAME);
     const res = await cache.match(buildUrl(path, query));
-    return res ? ((await res.json()) as T) : null;
+    return res ? await res.text() : null;
   } catch {
     return null;
   }
 }
 
-async function request<T>(method: string, path: string, body?: unknown, options: RequestOptions = {}): Promise<T> {
+async function requestText(method: string, path: string, body?: unknown, options: RequestOptions = {}): Promise<string> {
   const { signal, timeoutMs = DEFAULT_TIMEOUT_MS, headers, query, persist } = options;
   const url = buildUrl(path, query);
 
@@ -73,7 +79,7 @@ async function request<T>(method: string, path: string, body?: unknown, options:
 
     const text = await res.text();
     if (persist) void writeCache(url, text);
-    return (text ? JSON.parse(text) : null) as T;
+    return text;
   } catch (err) {
     if (timeoutController.signal.aborted && !(signal?.aborted ?? false)) {
       throw new Error('Sunucu yanıt vermedi. Lütfen tekrar deneyin.');
@@ -84,11 +90,18 @@ async function request<T>(method: string, path: string, body?: unknown, options:
   }
 }
 
+async function request<T>(method: string, path: string, body?: unknown, options: RequestOptions = {}): Promise<T> {
+  const text = await requestText(method, path, body, options);
+  return (text ? JSON.parse(text) : null) as T;
+}
+
 export const api = {
   get: <T>(path: string, options?: RequestOptions) => request<T>('GET', path, undefined, options),
+  getText: (path: string, options?: RequestOptions) => requestText('GET', path, undefined, options),
   post: <T>(path: string, body?: unknown, options?: RequestOptions) => request<T>('POST', path, body, options),
   put: <T>(path: string, body?: unknown, options?: RequestOptions) => request<T>('PUT', path, body, options),
   patch: <T>(path: string, body?: unknown, options?: RequestOptions) => request<T>('PATCH', path, body, options),
   delete: <T>(path: string, options?: RequestOptions) => request<T>('DELETE', path, undefined, options),
   readCache,
+  readCacheText,
 };

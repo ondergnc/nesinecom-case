@@ -1,1 +1,1 @@
-export { api, readCache, type RequestOptions } from './api';
+export { api, readCache, readCacheText, type RequestOptions } from './api';

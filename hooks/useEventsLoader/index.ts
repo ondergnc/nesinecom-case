@@ -3,15 +3,14 @@
 import { useCallback, useEffect } from 'react';
 import {
   applyCachedEvents,
-  BETS_PATH,
+  BETS_API_PATH,
   loadEvents,
-  normalizeEvents,
+  parseEventsPayload,
   selectEventsError,
   selectEventsStatus,
   selectIsEventsEmpty,
   selectIsEventsLoading,
   selectIsRevalidating,
-  type RawBetsResponse,
 } from '@/features/events';
 import { api } from '@/services';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -28,9 +27,11 @@ export function useEventsLoader(): UseEventsLoaderResult {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const cached = await api.readCache<RawBetsResponse>(BETS_PATH);
-      if (!cancelled && cached) {
-        dispatch(applyCachedEvents(normalizeEvents(cached)));
+      const cachedText = await api.readCacheText(BETS_API_PATH);
+      if (!cancelled && cachedText) {
+        try {
+          dispatch(applyCachedEvents(parseEventsPayload(cachedText)));
+        } catch {}
       }
       if (!cancelled) dispatch(loadEvents());
     })();

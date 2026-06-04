@@ -3,11 +3,14 @@ import { api } from '@/services';
 import type { RootState } from '@/store';
 import { EventRowKind, RequestStatus } from './enum';
 import type { EventListRow, EventsState, NormalizedEvent, NormalizedEvents, RawBetsResponse } from './interface';
+import { parseEventsPayload } from './parseEvents';
 
 export * from './enum';
 export * from './interface';
+export { parseEventsPayload } from './parseEvents';
 
 export const BETS_PATH = '/bets';
+export const BETS_API_PATH = '/api/bets';
 
 export function normalizeEvents(raw: RawBetsResponse): NormalizedEvents {
   const byId: Record<string, NormalizedEvent> = {};
@@ -56,8 +59,8 @@ export const loadEvents = createAsyncThunk<NormalizedEvents, void, { rejectValue
   'events/load',
   async (_, { signal, rejectWithValue }) => {
     try {
-      const raw = await api.get<RawBetsResponse>(BETS_PATH, { signal, persist: true });
-      return normalizeEvents(raw);
+      const text = await api.getText(BETS_API_PATH, { signal, persist: true });
+      return parseEventsPayload(text);
     } catch (err) {
       if (err instanceof DOMException && err.name === 'AbortError') throw err;
       const message = err instanceof Error ? err.message : 'Bilinmeyen bir hata oluştu';
